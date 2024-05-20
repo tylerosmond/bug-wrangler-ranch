@@ -3,13 +3,22 @@ const { database } = require("./database.js")
 const hireDrovers = (herdSize) => {
     const drovers = []
     const allDrovers = database.drovers
-    const numberNeeded = cattleToDrive / 10
+    const numberNeeded = herdSize / 10
+    let finalDrovers = []
 
-    for (let counter = 0; counter < numberNeeded; counter++) {
+    while (finalDrovers.length < numberNeeded) {
+    // for (let counter = 0; counter < numberNeeded; counter++) {
         const randomHerderId = Math.floor(Math.random() * allDrovers.length)
         drovers.push(allDrovers[randomHerderId])
-    }
-
+    // }
+    
+    drovers.forEach((drover => {
+        if (!finalDrovers.includes(drover)) {
+            finalDrovers.push(drover)
+        }
+    })
+    )}
+return finalDrovers
 }
 
 module.exports = { hireDrovers }
